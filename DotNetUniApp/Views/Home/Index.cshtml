@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>ASP.NET UniApp</h1>
+</div>
+
+@*<div class="row">
+        <div class="col-md-4">
+            <h2>Welcome to UniApp</h2>
+        </div>
+        <div class="col-md-4">
+            <h2>Build it from scrattchs &raquo;</h2>
+        </div>
+        <div class="col-md-4">
+            <h2>Lets Start</h2>
+        </div>
+    </div>*@
+
+<label class="FieldGHN">SBU</label>
+@Html.DropDownList("Branchcode", new SelectList(ViewBag.Branches, "Branchcode", "Branchcode"), "Select Branch", new { @id = "ddlBranches", @class = "SelectCtrlGHN", onchange = "return get_sbu(this)" })
+<label class="FieldGH">Group Head</label>
+
+@*<input type="text" id="txtBranchName" name="GrpHead" value="" readonly class="PO_GH" />*@
+
+<textarea id="txtBranchName" name="GrpHead" value=""></textarea>
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+            function get_sbu() {
+                var selected_val = $('#ddlBranches').find(":selected").attr('value');
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/selectSBU",
+                    data: "id=" + selected_val,
+                    success: function (data) {
+                        if (data.length > 0) {
+                            $('#txtBranchName').val(data[0].BranchName);
+                        }
+                        else {
+                            $('#txtBranchName').val('');
+                        }
+                    }
+                });
+            }
+</script>
