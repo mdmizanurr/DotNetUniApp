@@ -33,6 +33,7 @@ namespace DotNetUniApp.Controllers
             
         }
 
+
         public static List<BranchModel> PopulateBranches()
         {
             List<BranchModel> branches = new List<BranchModel>();
